@@ -8,6 +8,7 @@ import {
 import imgPic from "./img/gith.svg";
 
 function App() {
+  console.log("PROCESS", process.env);
   const dispatch = useDispatch();
   const [user, setUser] = useState("");
   useEffect(() => {

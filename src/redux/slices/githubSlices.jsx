@@ -9,7 +9,7 @@ export const fetchReposAction = createAsyncThunk(
       const config = {
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${`process.env.REACT_APP_GITHUB_TOKEN`}`,
+          Authorization: `Bearer ${process.env.REACT_APP_GITHUB_TOKEN}`,
         },
       };
 
@@ -35,7 +35,7 @@ export const fetchProfileAction = createAsyncThunk(
       const config = {
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${`process.env.REACT_APP_GITHUB_TOKEN`}`,
+          Authorization: `Bearer ${process.env.REACT_APP_GITHUB_TOKEN}`,
         },
       };
       const { data } = await axios.get(
