@@ -6,8 +6,16 @@ export const fetchReposAction = createAsyncThunk(
   "repos/list",
   async (user, { rejectWithValue, getState, dispatch }) => {
     try {
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${`process.env.REACT_APP_GITHUB_TOKEN`}`,
+        },
+      };
+
       const { data } = await axios.get(
-        `https://api.github.com/users/${user}/repos?per_page=30&sort=asc`
+        `https://api.github.com/users/${user}/repos?per_page=30&sort=asc`,
+        config
       );
       return data;
     } catch (error) {
@@ -24,7 +32,17 @@ export const fetchProfileAction = createAsyncThunk(
   "profile/list",
   async (user, { rejectWithValue, getState, dispatch }) => {
     try {
-      const { data } = await axios.get(`https://api.github.com/users/${user}`);
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${`process.env.REACT_APP_GITHUB_TOKEN`}`,
+        },
+      };
+      const { data } = await axios.get(
+        `https://api.github.com/users/${user}`,
+        config
+      );
+      console.log("data", data);
       return data;
     } catch (error) {
       if (!error?.response) {
@@ -40,7 +58,7 @@ export const fetchProfileAction = createAsyncThunk(
 const reposSlices = createSlice({
   name: "repos",
   initialState: {
-    user: "vandana7024",
+    user: "",
   },
   extraReducers: (builder) => {
     builder.addCase(fetchReposAction.pending, (state, action) => {

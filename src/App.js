@@ -9,20 +9,17 @@ import imgPic from "./img/gith.svg";
 
 function App() {
   const dispatch = useDispatch();
-  const [user, setUser] = useState("vandana7024");
+  const [user, setUser] = useState("");
   useEffect(() => {
-    dispatch(fetchReposAction("user"));
-    dispatch(fetchProfileAction("user"));
-  }, [dispatch]);
-
-  console.log("user", user);
+    dispatch(fetchReposAction(`${user}`));
+    dispatch(fetchProfileAction(`${user}`));
+  }, [dispatch, user]);
 
   const store = useSelector((state) => state?.repos);
   const { loading, reposList, profile, error } = store;
-  console.log("ss", store);
   return (
     <>
-      <section class="relative 2xl bg-gray-800 min-h-screen">
+      <section className="relative 2xl bg-gray-800 min-h-screen">
         <div class="relative container px-4 mx-auto">
           <div class="text-center mb-20">
             {/* <span class="text-lg text-blue-400 font-bold">
@@ -50,9 +47,9 @@ function App() {
           </div>
           {/* Content goes here */}
           {loading ? (
-            <h1>Please Wait .....</h1>
+            <h1 className="flex justify-center w-full">Please Wait .....</h1>
           ) : error ? (
-            <h1>error</h1>
+            <h1 className="flex justify-center w-full">Enter User UserName</h1>
           ) : (
             <div class="max-w-4xl mx-auto">
               <div class="flex flex-wrap -mx-4 mb-20">
@@ -138,7 +135,7 @@ function App() {
                   {/* Loop this */}
 
                   <>
-                    {reposList.map((repo) => (
+                    {reposList?.map((repo) => (
                       <div class="py-6 px-8 mb-4 bg-gray-600 rounded-lg">
                         <div class="flex items-center">
                           <a
@@ -154,35 +151,6 @@ function App() {
 
                   <div class="py-6 px-8"></div>
                 </div>
-              </div>
-              <div class="text-center bg-gray-300 ">
-                <p class="mb-4  text-gray-300">
-                  Developed by
-                  <span class="p-2 text-yellow-300">
-                    <a href="https://www.youtube.com/channel/UCvu6J9q1AM6q4xysGqAvVyw">
-                      i-Novotek
-                    </a>
-                  </span>
-                </p>
-                <a
-                  class="inline-flex text-blue-400 hover:text-blue-500 font-bold"
-                  href="https://www.youtube.com/channel/UCvu6J9q1AM6q4xysGqAvVyw"
-                >
-                  <span className="mb-10">Watch the tutorial</span>
-                  <svg
-                    class="ml-4 w-4 h-5"
-                    width="19"
-                    height="20"
-                    viewBox="0 0 19 20"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M18.7383 1.47342L18.7383 10.9304L17.5562 10.9304L17.5562 2.89788L0.834948 19.625L0.00154682 18.7916L16.7228 2.06448L9.28125 2.06448L9.28125 0.882355L18.1472 0.882355C18.4737 0.882355 18.7383 1.14697 18.7383 1.47342Z"
-                      fill="#1F40FF"
-                    ></path>
-                  </svg>
-                </a>
               </div>
             </div>
           )}
