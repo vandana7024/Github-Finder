@@ -14,8 +14,7 @@ export const fetchReposAction = createAsyncThunk(
       };
 
       const { data } = await axios.get(
-        `https://api.github.com/users/${user}/repos?per_page=30&sort=asc`,
-        config
+        `https://api.github.com/users/${user}/repos?per_page=30&sort=asc`
       );
       return data;
     } catch (error) {
@@ -38,10 +37,7 @@ export const fetchProfileAction = createAsyncThunk(
           Authorization: `Bearer ${process.env.REACT_APP_GITHUB_TOKEN}`,
         },
       };
-      const { data } = await axios.get(
-        `https://api.github.com/users/${user}`,
-        config
-      );
+      const { data } = await axios.get(`https://api.github.com/users/${user}`);
       console.log("data", data);
       return data;
     } catch (error) {
